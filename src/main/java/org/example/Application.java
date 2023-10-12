@@ -5,10 +5,7 @@ import org.example.entities.Customer;
 import org.example.entities.Order;
 import org.example.entities.Product;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -66,6 +63,15 @@ public class Application {
         */
 
         /*---------------------------------ESERCIZIO 2--------------------------------*/
+        Map<Customer, Double> totalSellsCustomer = orderList.stream()
+                .collect(Collectors.groupingBy(Order::getCustomer, Collectors.summingDouble(order->
+                        order.getProducts().stream().mapToDouble(Product::getPrice).sum()
+                )));
+        totalSellsCustomer.forEach((key, value) -> {
+            System.out.println("-------"+key+"----------");
+            System.out.println("-------"+value+"----------");
+
+        });
 
     }
 
